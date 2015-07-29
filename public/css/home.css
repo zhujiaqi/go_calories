@@ -1,0 +1,15 @@
+th, td
+{
+  border: 1px solid gray;
+}
+
+table
+{
+  width:100%;
+}
+
+th, td
+{
+  text-align:left;
+  padding:15px;
+}
