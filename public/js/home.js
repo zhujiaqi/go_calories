@@ -1,11 +1,19 @@
 $(function() {
+
+  delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+      clearTimeout(timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
+
   search = function(e){
     var q = $("#searchterm").val();
     if(!q) {
       return false;
     }
     $.getJSON("/query/" + q,
-    {},
     function(data) {
       $("#results").empty();
       $("#results").append("<p>搜索 <b>" + q + "</b> 的结果：</p>");
@@ -30,6 +38,10 @@ $(function() {
       });
     });
   }
-  $("#searchterm").keyup(search);
-  $("#search").click(search);
+  $("#searchterm").keyup(function(){
+    delay(search, 200);
+  });
+  $("#search").click(function(){
+    delay(search, 200);
+  });
 });

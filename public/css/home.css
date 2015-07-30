@@ -13,3 +13,8 @@ th, td
   text-align:left;
   padding:15px;
 }
+
+h2 {font-size: 4em;}
+#searchterm {width: 80%; font-size: 3em;}
+#search {width: 12%; font-size: 3em;}
+#results {font-size: 2.5em;}
