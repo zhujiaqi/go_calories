@@ -102,7 +102,7 @@ func main() {
 		FrameDeny:             true,
 		ContentTypeNosniff:    true,
 		BrowserXssFilter:      true,
-		ContentSecurityPolicy: "default-src 'self'",
+		//ContentSecurityPolicy: "default-src 'self'",
 	}))
 
 	m.Use(cors.Allow(&cors.Options{
@@ -156,6 +156,10 @@ func main() {
 		qs := QueryResult{HitWords: hitwords, Items: matches}
 		r.JSON(200, qs)
 	})
+
+  m.Get("/search/:name", func(params martini.Params, r render.Render) {
+    r.HTML(200, "search", params["name"]);
+  })
 
 	m.Use(martini.Static("public"))
 	m.RunOnAddr(":3001")

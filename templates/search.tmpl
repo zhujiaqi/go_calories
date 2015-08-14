@@ -1,0 +1,64 @@
+<header>
+  <a href="/" class="header-left">
+    <i class="iconfont icon-left"></i>
+  </a>
+  <div class="header-middle search-wrap">
+    <input id="searchterm" class="search-input" name="searchterm" value="{{.}}" placeholder="请输入想要搜索的食物如：鸡蛋"/>
+  </div>
+  <div id="search" class="header-right">
+    <i class="iconfont icon-search"></i>
+  </div>
+</header>
+<div class="content-page"></div>
+<table class="hit-words-table content-page">
+<tbody class="hit-words-tbody">
+  <tr class="head">
+    <th class="th1">种类</th>
+    <th class="th2">大卡/100克</th>
+  </th>
+</tbody>
+</table>
+<div class="detail-page hidden">
+  <header>
+    <div class="header-left">
+      <i class="iconfont icon-left"></i>
+    </div>
+    <h1 class="header-middle detail-name"> </h1>
+  </header>
+  <div class="content-page">
+    <div id="results"></div>
+  </div>
+</div>
+
+<script id="hitword_tpl" type="text/template">
+<% if (hitwords.length) { %>
+<% _.each(hitwords, function(v, i) { %>
+<tr class="body" data-index="<%= i %>">
+  <td class="name">
+    <%= v.name %>
+  </td>
+  <td>
+    <%= v.cal %>
+  </td>
+</tr>
+<% }) %>
+<% } else {%>
+<tr class="no-hit"><td>没有找到结果 :( </td><td></td></tr>
+<% } %>
+</script>
+
+<script id="item_tpl" type="text/template">
+<table class="table">
+  <tr class="head">
+    <th> 营养元素 </th>
+    <th> 每100g </th>
+  </tr>
+  <% _.each(item, function(v, i) { %>
+    <tr <% if (i == 0) { %>class="total"<% } %>>
+      <td><%= v.name %></td>
+      <td><%= v.val %></td>
+    </tr>
+  <% }) %>
+</table>
+</script>
+

@@ -2,3 +2,21 @@
 <input id="searchterm" type="text" placeholder="请输入想要搜索的食物如：鸡蛋" />
 <button id="search">搜索</button>
 <div id="results"></div>
+<script id="item_tpl" type="text/template">
+<div class="item-name-wrap">
+  <h3 class="item-names">
+    <%= item.name %>
+    <% if (item.alters[0]) { %>
+      又名<%= item.alters.join(', ') %>
+    <% } %>
+  </h3>
+</div>
+<table class="table">
+  <% _.each(item.values, function(v) { %>
+    <tr>
+      <th><%= v[0] %></th>
+      <td><%= v[1] %></td>
+    </tr>
+  <% }) %>
+</table>
+</script>

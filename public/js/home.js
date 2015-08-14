@@ -1,6 +1,13 @@
 $(function() {
+  var item_tpl = _.template($('#item_tpl').html());
+  var hitword_tpl = _.template($('#hitword_tpl').html());
+  var cals = [];
+  var $detailPage = $('.detail-page');
+  var $detail = $('#results');
+  var $hitWords = $('.hit-words-tbody');
+  var detailsData;
 
-  delay = (function(){
+  var delay = (function(){
     var timer = 0;
     return function(callback, ms){
       clearTimeout(timer);
@@ -8,40 +15,89 @@ $(function() {
     };
   })();
 
-  search = function(e){
+  var search = function(e){
     var q = $("#searchterm").val();
     if(!q) {
       return false;
     }
     $.getJSON("/query/" + q,
     function(data) {
-      $("#results").empty();
-      $("#results").append("<p>搜索 <b>" + q + "</b> 的结果：</p>");
-      $.each(data.Items, function(i, item){
-        if (item.alters[0]) {
-          $("#results").append("<div><h3>" + item.name +" 又名" + item.alters + "</h3>");
-        } else {
-          $("#results").append("<div><h3>" + item.name + "</h3>");
-        }
-        $("#results").append("<table>");
-        $.each(item.values, function(i, value){
-          if(value[1] !== '一') {
-            $("#results").append("<tr><th>" + value[0] +"</th><td>" + value[1] + "</td></tr>");
-          }
+      detailsData = data.Items;
+      $detail.empty();
+      data.hitwords = [];
+      _.each(data.HitWords, function(w, i) {
+        var cal = data.Items[i].values[0][1];
+        data.hitwords.push({
+          'name': w,
+          'cal': cal
         });
-        $("#results").append("</table>");
-        $("#results").append("</div>");
       });
-      $("#results").append("<hr><p>命中单词：</p>");
-      $.each(data.HitWords, function(i,name){
-        $("#results").append("<div>" + name +"</div>");
-      });
+      $hitWords.find('.body, .no-hit').remove();
+      $hitWords.append(hitword_tpl({
+        hitwords: data.hitwords
+      }));
     });
-  }
+  };
+
+  var showDetail = function(index) {
+    //console.log(index, detailsData[index]);
+    $detailPage.find('.detail-name').html(detailsData[index]['name']);
+    var data = [];
+    _.each(detailsData[index]['values'], function(v, i) {
+      var match = v[0].match(/^(.*)\((.*)\)$/);
+      var cal = v[1];
+      if (match) {
+        var name = match[1];
+        var base = match[2];
+        var val;
+        if (cal == '一') {
+          val = cal;
+        } else {
+          val = cal + trans(base);
+        }
+        if (i == 0) {
+          var kj = (cal * 4.184).toFixed(2);
+          val = '<span>' + cal + '</span>大卡<br><span>' + kj + '</span>千焦';
+        }
+        data.push({
+          'name': name,
+          'val': val
+        });
+      } else {
+      }
+    });
+    console.log(data);
+    $detail.html(item_tpl({item: data}));
+    $detailPage.removeClass('hidden');
+  };
   $("#searchterm").keyup(function(){
     delay(search, 200);
   });
   $("#search").click(function(){
     delay(search, 200);
   });
+  search();
+  $('.hit-words-table').on('click', 'tr', function() {
+    console.log('.');
+    var self = $(this);
+    var index = self.data('index');
+    showDetail(index);
+  });
+  $detailPage.on('click', '.header-left', function() {
+    $detailPage.addClass('hidden');
+  });
+  function trans(base) {
+    switch (base) {
+      case '克':
+        return 'g';
+      case '微克':
+        return 'μg';
+      case '毫克':
+        return 'mg';
+      case '大卡':
+        return '大卡';
+      default:
+        return '';
+    }
+  }
 });
