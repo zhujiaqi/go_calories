@@ -48,7 +48,7 @@ th {
   font-size: 1.5rem;
 }
 td {
-  border: 1px solid $lgray;
+  border: 1px solid #eee;
   font-size: 1.2rem;
 }
 
@@ -75,6 +75,9 @@ th, td
     background-color: #dfdfdf;
     color: #4e4e4e;
     border: none;
+    th {
+      border: none;
+    }
   }
   .name {
     color: $dgray;
@@ -170,7 +173,7 @@ header {
   .table {
     color: $lgray;
     td,th {
-      border: 1px solid #d3d3d3;
+      border: 1px solid #eee;
     }
     .head {
       th {

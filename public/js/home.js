@@ -40,7 +40,6 @@ $(function() {
   };
 
   var showDetail = function(index) {
-    //console.log(index, detailsData[index]);
     $detailPage.find('.detail-name').html(detailsData[index]['name']);
     var data = [];
     _.each(detailsData[index]['values'], function(v, i) {
@@ -57,7 +56,7 @@ $(function() {
         }
         if (i == 0) {
           var kj = (cal * 4.184).toFixed(2);
-          val = '<span>' + cal + '</span>大卡<br><span>' + kj + '</span>千焦';
+          val = '<span>' + cal + '</span> 大卡<br><span>' + kj + '</span> 千焦';
         }
         data.push({
           'name': name,
@@ -66,7 +65,6 @@ $(function() {
       } else {
       }
     });
-    console.log(data);
     $detail.html(item_tpl({item: data}));
     $detailPage.removeClass('hidden');
   };
@@ -77,8 +75,7 @@ $(function() {
     delay(search, 200);
   });
   search();
-  $('.hit-words-table').on('click', 'tr', function() {
-    console.log('.');
+  $('.hit-words-table').on('click', 'tr.body', function() {
     var self = $(this);
     var index = self.data('index');
     showDetail(index);
