@@ -42,8 +42,7 @@ $(function() {
           'cal': cal
         });
       });
-      $hitWords.find('.body, .no-hit').remove();
-      $hitWords.append(hitword_tpl({
+      $hitWords.empty().append(hitword_tpl({
         hitwords: data.hitwords
       }));
     });

@@ -12,10 +12,6 @@
 <div class="content-page"></div>
 <table class="hit-words-table content-page">
 <tbody class="hit-words-tbody">
-  <tr class="head">
-    <th class="th1">种类</th>
-    <th class="th2">大卡/100克</th>
-  </th>
 </tbody>
 </table>
 <div class="detail-page hidden">
@@ -32,6 +28,10 @@
 
 <script id="hitword_tpl" type="text/template">
 <% if (hitwords.length) { %>
+<tr class="head">
+  <th class="th1">种类</th>
+  <th class="th2">大卡/100克</th>
+</th>
 <% _.each(hitwords, function(v, i) { %>
 <tr class="body" data-index="<%= i %>">
   <td class="name">
@@ -43,7 +43,7 @@
 </tr>
 <% }) %>
 <% } else {%>
-<tr class="no-hit"><td>没有找到结果 :( </td><td></td></tr>
+<tr class="no-hit"><td colspan="2"><img class="no-hit-img" src="/images/no-hit.png"  /><br>十分抱歉，现在还没有您要查询的信息</td></tr>
 <% } %>
 </script>
 

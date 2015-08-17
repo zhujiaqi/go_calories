@@ -94,7 +94,13 @@ th, td
     font-size: 1.2rem;
     border: none;
     td {
+      text-align: center;
       border: none;
+    }
+    .no-hit-img {
+      width: 225px;
+      display: block;
+      margin: 3em auto 2em;
     }
   }
 }
