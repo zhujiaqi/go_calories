@@ -25,10 +25,20 @@ $(function() {
       detailsData = data.Items;
       $detail.empty();
       data.hitwords = [];
+      /*
       _.each(data.HitWords, function(w, i) {
+        console.log(w,i, data.Items[i]);
         var cal = data.Items[i].values[0][1];
         data.hitwords.push({
           'name': w,
+          'cal': cal
+        });
+      });
+      */
+      _.each(data.Items, function(item, i) {
+        var cal = item.values[0][1];
+        data.hitwords.push({
+          'name': item.name + (item.alters[0] ? ('，又名' + item.alters.join('，')) : ''),
           'cal': cal
         });
       });
