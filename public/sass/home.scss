@@ -1,8 +1,12 @@
 @import "compass/reset";
 @import "compass/css3";
+@import "compass/css3/transform";
 $dgray: #6f6f7b;
 $lgray: #9e9e9f;
 $red: #ff485d;
+$r: #ff364b;
+$y: #ffc336;
+$g: #b3ce3e;
 @font-face {
   font-family: 'iconfont';
   src: url('//at.alicdn.com/t/font_1439538582_1292963.eot'); /* IE9*/
@@ -29,6 +33,9 @@ a {
 }
 .icon-right:before {
   content: '\e604';
+}
+.no-highlight {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .size-base {
   font-size: 12px!important;
@@ -81,6 +88,20 @@ th, td
   }
   .name {
     color: $dgray;
+    line-height: 1.2em;
+    padding: 0.9em 1em;
+  }
+  .icon-right {
+    float: right;
+    &.n0 {
+      color: $r;
+    }
+    &.n1 {
+      color: $y;
+    }
+    &.n2 {
+      color: $g;
+    }
   }
   .th1 {
     width: 60%;
@@ -201,6 +222,118 @@ header {
     span {
       color: $red;
     }
+  }
+}
+
+.banner-img {
+  width: 100%;
+  display: block;
+}
+.banner {
+  display: block;
+  position: relative;
+  @extend .size-base;
+  .input-wrap {
+    position: absolute;
+    background-color: white;
+    width: 86%;
+    height: 3.25em;
+    font-size: 1em;
+    bottom: 1.1em;
+    left: 50%;
+    margin-left: -43%;
+    @include border-radius(1.5em);
+    text-align: center;
+    .search-input {
+      -webkit-appearance: none;
+      color: $dgray;
+      background: transparent;
+      border: none;
+      width: 75%;
+      font-size: 1.25em;
+      height: 2.6em;
+      padding: .8em;
+      box-sizing: border-box;
+      text-align: center;
+      outline: none;
+    }
+    .submit {
+      @extend .no-highlight;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 3.25em;
+      width: 3.25em;
+      text-align: center;
+      box-sizing: border-box;
+      padding-top: .8em;
+      .iconfont {
+        font-size: 1.5em;
+        color: $dgray;
+      }
+    }
+  }
+}
+.recommend {
+  width: 100%;
+  @extend .no-highlight;
+  .tr.name {
+    .td {
+      padding: 2.4em 0 1.4em;
+    }
+    color: $g;
+  }
+  .tr.desc {
+    .td {
+      vertical-align: top;
+      padding: 1.2em 0 .6em;
+      color: #c2c2c2;
+      line-height: 1.4em;
+      font-size: 1em;
+    }
+  }
+  .tr.buy {
+    .td {
+      padding: .6em 0 1.5em;
+    }
+    .link {
+      font-size: 1em;
+      display: inline-block;
+      line-height: 1.8em;
+      height: 1.8em;
+      @include border-radius(.9em);
+      border: 1px solid $g;
+      color: $g;
+      padding: 0 1.2em;
+      box-sizing: border-box;
+      @include transform(scale(0.85));
+    }
+  }
+  .img {
+    max-width: 100%;
+    max-height: 6em;
+  }
+  .tr.image .td {
+    height: 6em;
+  }
+  .col1, .col2, .col3 {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    border: none;
+  }
+  .col1 {
+    width: 31%;
+  }
+  .col2 {
+    border-left: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    .img {
+      max-height: 5.2em;
+    }
+  }
+  .col3 {
+    width: 31%;
   }
 }
 

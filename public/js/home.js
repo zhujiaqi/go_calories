@@ -1,6 +1,24 @@
 $(function() {
-  var item_tpl = _.template($('#item_tpl').html());
-  var hitword_tpl = _.template($('#hitword_tpl').html());
+  $('.home .submit').on('tap', function() {
+    var search = $.trim($('.search-input').val());
+    if (search) {
+      location.href = '/search/' + encodeURIComponent(search);
+    }
+  });
+  $('.recommend').on('tap', '.td', function() {
+    var self = $(this);
+    if (self.hasClass('col1')) {
+      location.href = "http://www.lovepurejoy.com/product/purejoy?fromCal";
+    }
+    if (self.hasClass('col2')) {
+      location.href = "http://www.lovepurejoy.com/product/meal?fromCal";
+    }
+    if (self.hasClass('col3')) {
+      location.href = "http://www.lovepurejoy.com/product/detox?fromCal";
+    }
+  });
+  var item_tpl = _.template($('#item_tpl').html() || '');
+  var hitword_tpl = _.template($('#hitword_tpl').html() || '');
   var cals = [];
   var $detailPage = $('.detail-page');
   var $detail = $('#results');
@@ -16,7 +34,7 @@ $(function() {
   })();
 
   var search = function(e){
-    var q = $("#searchterm").val();
+    var q = $.trim($("#searchterm").val());
     if(!q) {
       return false;
     }
@@ -80,16 +98,18 @@ $(function() {
   $("#searchterm").keyup(function(){
     delay(search, 200);
   });
-  $("#search").click(function(){
+  $("#search").on('tap', function(){
     delay(search, 200);
   });
-  search();
-  $('.hit-words-table').on('click', 'tr.body', function() {
+  if (item_tpl) {
+    search();
+  }
+  $('.hit-words-table').on('tap', 'tr.body', function() {
     var self = $(this);
     var index = self.data('index');
     showDetail(index);
   });
-  $detailPage.on('click', '.header-left', function() {
+  $detailPage.on('tap', '.header-left', function() {
     $detailPage.addClass('hidden');
   });
   function trans(base) {
