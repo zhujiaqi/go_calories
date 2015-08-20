@@ -93,15 +93,7 @@ th, td
   }
   .icon-right {
     float: right;
-    &.n0 {
-      color: $r;
-    }
-    &.n1 {
-      color: $y;
-    }
-    &.n2 {
-      color: $g;
-    }
+    color: $g;
   }
   .th1 {
     width: 60%;
@@ -125,7 +117,7 @@ th, td
     }
   }
 }
-.hit-words-table, .content-page {
+.content-page {
   padding-top: 3.6rem;
 }
 header {
