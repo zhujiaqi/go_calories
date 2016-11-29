@@ -33,6 +33,10 @@ type QueryResult struct {
 	HitWords []string
 }
 
+type CountResult struct {
+	Total    int
+}
+
 var Data map[string]*Item
 var SAIndex Index
 var IDs map[string]int
@@ -159,6 +163,11 @@ func main() {
 
   m.Get("/search/:name", func(params martini.Params, r render.Render) {
     r.HTML(200, "search", params["name"]);
+  })
+
+	m.Get("/count", func(params martini.Params, r render.Render) {
+    qs := CountResult{Total: len(IDs)}
+		r.JSON(200, qs)
   })
 
 	m.Use(martini.Static("public"))
