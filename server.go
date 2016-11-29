@@ -162,5 +162,5 @@ func main() {
   })
 
 	m.Use(martini.Static("public"))
-	m.RunOnAddr(":3001")
+	m.RunOnAddr(":8888")
 }
